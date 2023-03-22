@@ -22,13 +22,13 @@ L 03/22/2023 - 22:47:31: [weapon_pickup_logger.smx] Player iLoco<2><STEAM_1:0:10
 # Configuration errors
 
 - The directory for the file has not been created.
-	- Error text: `The file <path> could not be created, either by running a string or there is no directory created.`
-	- Solution: create a directory before this file. You don't have to create the file, it will automatically be created.
+	> Error text: `The file <path> could not be created, either by running a string or there is no directory created.`
+	> Solution: create a directory before this file. You don't have to create the file, it will automatically be created.
 
 # Question (Q) - Answer (A)
 
-#### Q: How can these logs be displayed on the WEB?
-#### A: Enable `sm_wpl_log_type 1`. Works only if the plugin that sends logs to the WEB works through `OnLogAction`. (can be checked by opening the source of that plugin and searching for `OnLogAction`).
-
-#### Q: Why is an ID needed?
-#### A: To identify a weapon, for example, to track its movement. The weapon has the same ID only for its session (until deleted).
+> Q: How can these logs be displayed on the WEB?
+> A: Enable `sm_wpl_log_type 1`. Works only if the plugin that sends logs to the WEB works through `OnLogAction`. (can be checked by opening the source of that plugin and searching for `OnLogAction`).
+---
+> Q: Why is an ID needed?
+> A: To identify a weapon, for example, to track its movement. The weapon has the same ID only for its session (until deleted).
