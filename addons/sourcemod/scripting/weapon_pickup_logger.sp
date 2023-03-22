@@ -9,7 +9,7 @@
 public Plugin myinfo = {
 	name = "Weapon Pickup Logger",
 	author = "iLoco",
-	version = "1.3.0",
+	version = "1.4.0",
 	description = "Logs weapon pickup events.",
 	url = "https://github.com/IL0co/weapon-pickup-logger",
 };
@@ -25,6 +25,7 @@ LogType logType;
 int offsetWeaponDefIndex;
 CSWeaponID lastBuyedWeapon;
 int entitySpawnTime[2048];
+int startID;
 
 stock CSWeaponID GetWeaponID(int weapon) {
 	return CS_ItemDefIndexToID(GetEntData(weapon, offsetWeaponDefIndex));
@@ -48,7 +49,9 @@ public void OnSDKHook_WeaponEquip_Post(int client, int weapon) {
 		reason = "just picked";
 	}
 
-	#define ARGS client, className, reason
+	#define MESSAGE "Player %L picked up the weapon %s (ID: %X). Reason for uplift: %s."
+	#define ID startID * EntIndexToEntRef(weapon)
+	#define ARGS client, className, ID, reason
 
 	switch(logType) {
 		case LogType_Message: {
@@ -87,6 +90,10 @@ public void OnConVarChanged_LogFile(ConVar cvar, const char[] oldValue, const ch
 	if(logFile == null) {
 		SetFailState("The file '%s' could not be created, either by running a string or there is no directory created.", path);
 	}
+}
+
+public void OnMapStart() {
+	startID = GetURandomInt();
 }
 
 public void OnPluginStart() {

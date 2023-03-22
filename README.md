@@ -13,10 +13,10 @@ Logs the event of a player picking up a weapon. The specific reason is recorded 
 
 # Text in the log
 ```c
-L 03/22/2023 - 22:52:31: [weapon_pickup_logger.smx] Player iLoco<2><STEAM_1:0:104481081><> picked up the weapon weapon_xm1014. Reason for uplift: purchase.
-L 03/22/2023 - 22:52:44: [weapon_pickup_logger.smx] Player iLoco<2><STEAM_1:0:104481081><> picked up the weapon weapon_negev. Reason for uplift: issued by map or plugin.
-L 03/22/2023 - 23:07:03: [weapon_pickup_logger.smx] Player iLoco<2><STEAM_1:0:104481081><> picked up the weapon weapon_negev. Reason for uplift: just picked.
-L 03/22/2023 - 22:47:31: [weapon_pickup_logger.smx] Player iLoco<2><STEAM_1:0:104481081><> picked up the weapon weapon_knife. Reason for uplift: when player spawns.
+L 03/22/2023 - 22:52:31: [weapon_pickup_logger.smx] Player iLoco<2><STEAM_1:0:104481081><> picked up the weapon weapon_xm1014 (ID: 24F7C899). Reason for uplift: purchase.
+L 03/22/2023 - 22:52:44: [weapon_pickup_logger.smx] Player iLoco<2><STEAM_1:0:104481081><> picked up the weapon weapon_negev (ID: 87B37E00). Reason for uplift: issued by map or plugin.
+L 03/22/2023 - 23:07:03: [weapon_pickup_logger.smx] Player iLoco<2><STEAM_1:0:104481081><> picked up the weapon weapon_negev (ID: 87B37E00). Reason for uplift: just picked.
+L 03/22/2023 - 22:47:31: [weapon_pickup_logger.smx] Player iLoco<2><STEAM_1:0:104481081><> picked up the weapon weapon_knife (ID: ACE8EA6E). Reason for uplift: when player spawns.
 ```
 
 # Configuration errors
@@ -29,3 +29,6 @@ L 03/22/2023 - 22:47:31: [weapon_pickup_logger.smx] Player iLoco<2><STEAM_1:0:10
 
 #### Q: How can these logs be displayed on the WEB?
 #### A: Enable `sm_wpl_log_type 1`. Works only if the plugin that sends logs to the WEB works through `OnLogAction`. (can be checked by opening the source of that plugin and searching for `OnLogAction`).
+
+#### Q: Why is an ID needed?
+#### A: To identify a weapon, for example, to track its movement. The weapon has the same ID only for its session (until deleted).
