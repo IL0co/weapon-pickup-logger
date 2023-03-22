@@ -9,13 +9,14 @@
 public Plugin myinfo = {
 	name = "Weapon Pickup Logger",
 	author = "iLoco",
-	version = "1.1.0",
+	version = "1.2.0",
 	description = "Logs weapon pickup events.",
 	url = "https://github.com/IL0co/weapon-pickup-logger",
 };
 
 enum LogType {
 	LogType_Message = 0,
+	LogType_Action = 1,
 }
 
 LogType logType;
@@ -45,7 +46,14 @@ public void OnSDKHook_WeaponEquip_Post(int client, int weapon) {
 		reason = "just picked";
 	}
 
-	LogMessage("Player %L picked up the weapon %s. Reason for uplift: %s.", client, className, reason);
+	switch(logType) {
+		case LogType_Message: {
+			LogMessage("Player %L picked up the weapon %s. Reason for uplift: %s.", client, className, reason);
+		}
+		case LogType_Action: {
+			LogAction(client, -1, "Player %L picked up the weapon %s. Reason for uplift: %s.", client, className, reason);
+		}
+	}
 }
 
 public void OnSDKHook_PlayerSpawn_Pre(int client) {
@@ -70,7 +78,7 @@ public void OnPluginStart() {
 		}
 	}
 
-	ConVar cvar = CreateConVar("sm_wpl_log_type", "0", "Logging type.", _, true, 0.0, true, 0.0);
+	ConVar cvar = CreateConVar("sm_wpl_log_type", "0", "Logging type: 0 - Message, 1 - Action", _, true, 0.0, true, 1.0);
 	cvar.AddChangeHook(OnConVarChanged_LogType);
 	OnConVarChanged_LogType(cvar, "", "");
 }
