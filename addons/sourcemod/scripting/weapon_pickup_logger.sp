@@ -48,17 +48,19 @@ public void OnSDKHook_WeaponEquip_Post(int client, int weapon) {
 		reason = "just picked";
 	}
 
+	#define ARGS client, className, reason
+
 	switch(logType) {
 		case LogType_Message: {
-			LogMessage("Player %L picked up the weapon %s. Reason for uplift: %s.", client, className, reason);
+			LogMessage(MESSAGE, ARGS);
 		}
 		case LogType_Action: {
-			LogAction(client, -1, "Player %L picked up the weapon %s. Reason for uplift: %s.", client, className, reason);
+			LogAction(client, -1, MESSAGE, ARGS);
 		}
 		case LogType_File: {
 			char timeFormat[64];
 			FormatTime(timeFormat, sizeof timeFormat, "%D - %T:", time);
-			logFile.WriteLine("%s Player %L picked up the weapon %s. Reason for uplift: %s.", timeFormat, client, className, reason);
+			logFile.WriteLine("%s " ... MESSAGE, timeFormat, ARGS);
 		}
 	}
 }
