@@ -13,6 +13,14 @@ public Plugin myinfo = {
 	url = "https://github.com/IL0co/weapon-pickup-logger",
 };
 
-public void OnPluginStart() {
+public void OnClientPostAdminCheck(int client) {
+	
+}
 
+public void OnPluginStart() {
+	for(int i = 1; i <= MaxClients; i++) {
+		if(IsClientInGame(i)) {
+			OnClientPostAdminCheck(i);
+		}
+	}
 }
